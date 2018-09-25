@@ -31,7 +31,7 @@ export default new Router({
   	component: EditorList
   },
   {
-  	path: '/themeDetail/:id',
+  	path: '/themeDetail/:id/:next',
   	name: 'themeDetail',
   	component: ThemeDetail
   },

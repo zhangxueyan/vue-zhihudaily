@@ -7,11 +7,11 @@
      <div v-html="detailOne.body"></div>
      <div class="fot-nav">
       <i class="iconfont icon-xiangqian" @click = "goBack"></i>
-      <i class="iconfont icon-xianghou"></i>
+      <!-- <i class="iconfont icon-xianghou" @click ="goNext"></i> -->
       <i class="iconfont icon-dianzan" @click = "toggleZan" :class="{active:isZan}">
         <em>{{extraData.popularity}}</em>
       </i>
-      <i class="iconfont icon-fenxiang" @click = 'isShowShareBox=true,isMask=true'></i>
+      <i class="iconfont icon-fenxiang" @click = 'isShowShareBox = true,isMask= true'></i>
       <i class="iconfont icon-pinglun" @click = "goComments"><em>{{extraData.comments}}</em></i>
     </div>
 
@@ -36,6 +36,7 @@
     </div>
     <!--mask-->
     <div class="mask" v-if='isMask' @click = 'isShowShareBox = false,isMask=false'></div>
+
   </div>
 </template>
 
@@ -44,6 +45,7 @@ import axios from 'axios'
 import router from '../router'
   export default {
     name: 'detail',
+    props:['transitionVariable'],
     data () {
       return {
         msg: 'Welcome to Your detail',
@@ -65,7 +67,8 @@ import router from '../router'
               axios.get('api/news/'+this.$route.params.id)
               .then((response)=>{
                 this.detailOne = response.data
-           
+                console.log(response.data)
+                console.log(this.$route.params.id)
               })
               .catch((error)=>{
                 console.log(error);
@@ -129,13 +132,13 @@ import router from '../router'
   width: 10rem;
   height: 0.9375rem;
   background: #fff;
-  border: 1px solid red;
   position: fixed;
   left: 0;
   bottom: 0;
 }
 .iconfont {
   font-size: 0.78125rem;
+  padding:0 0.1rem;
 }
 .icon-dianzan.active{
   color:red;
@@ -172,7 +175,7 @@ import router from '../router'
 .share-btns {
   padding: 0 0.3125rem;
 }
-  .mask {
+.mask {
   width: 10rem;
   height: 100%;
   position: fixed;
